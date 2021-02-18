@@ -1,42 +1,113 @@
 # Development-Template-2-4-2021
-* Клонировать origin-репозиторий к себе на локальный компьютер, воспользовавшись следующей командой:
+
+
+  - [Git][git] как пример системы контроля версий (VCS). [Git for Windows][https://git-scm.com/downloads] [tortoisegit][https://tortoisegit.org/]
+  - [GitHub][https://github.com] как пример хостинга для проектов.
+  - [Google Test][github.com/google/googletest] как пример фреймфорка для модульного тестирования
+    (xUnit).
+  - [CMake](http://www.cmake.org) как кроссплатформенная и IDE-независимая [Дубров система построения проектов cmake]
+    система сборки для проектов на языке С/С++.
+
+  1. Создать свой личный аккаунт на [GitHub][https://github.com], если таковой
+     отсутствует. Для определенности обозначим аккаунт `https://github.com-account`.
+
+  1. Сделать fork [центрального репозитория] [https://github.com/UNN-VMK-Software/mp2-lab1-set] (Сделали на практике) к себе в личное пространство на GitHub. В результате
+     будет создана копия репозитория с названием
+	 1. В правом верхнем углу окна GitHub нажать кнопку `Fork`.
+     2. Выбрать в качестве организации, куда направить форк, организацию,
+        соответствующую вашему личному аккаунту `@https://github.com-account`.
+
+  1. Клонировать origin-репозиторий к себе на локальный компьютер,
+     воспользовавшись следующей командой:
+
   ```bash
   $ git clone {адрес вашего репозитория}
   ```
-* Перейти в созданную директорию :
+
+  1. Перейти в созданную директорию :
 
   ```bash
   $ cd ./itseez-ws-2016-practice
   ```
 
+
+  1. Настроить имя пользователя, из-под которого будут выполняться все операции
+     с репозиторием Git:
+
+  ```bash
+  $ git config --local user.name "Your Name"
+  $ git config --local user.email "your.email@somewhere.com"
+  ```
+  Просмотр текущих настроек
+  git config --list
+  
+  Очистить текущие параметры
+  git config --local credential.helper ""
+
+  Примечание: если не выполнить указанную операцию, то при попытке размещения
+  изменений на сервер потребуется вводить ваш `https://github.com-account` (появится
+  сообщение, приведенное ниже).
+
+  ```
+  warning: push.default is unset; its implicit value is changing in
+  Git 2.0 from 'matching' to 'simple'. To squelch this message
+  and maintain the current behavior after the default changes, use:
+
+    git config --global push.default matching
+
+  To squelch this message and adopt the new behavior now, use:
+
+    git config --global push.default simple
+
+  When push.default is set to 'matching', git will push local branches
+  to the remote branches that already exist with the same name.
+
+  In Git 2.0, Git will default to the more conservative 'simple'
+  behavior, which only pushes the current branch to the corresponding
+  remote branch that 'git pull' uses to update the current branch.
+
+  See 'git help config' and search for 'push.default' for further information.
+  (the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+  'current' instead of 'simple' if you sometimes use older versions of Git)
+
+  Username for 'https://https://github.com.com': https://github.com-account
+  Password for 'https://https://github.com-account@https://github.com.com':
+  ```
+
 ### Работа с ветками
-* Получить список веток:
+
+Когда сделан форк репозитория, у вас по умолчанию создается единственная ветка
+`master`. Тем не менее, при решении независимых задач следует создавать
+отдельные ветки Git. Далее показаны основные команды для управления ветками на
+примере ветки `add-new-google-tests`.
+
+  1. Получить список веток:
 
   ```bash
   $ git branch [-v]
   # [-v] - список с информацией о последних коммитах
   ```
 
-* Создать ветку:
+  1. Создать ветку:
 
   ```bash
   $ git branch add-new-google-tests
   ```
 
-* Перейти в ветку:
+  1. Перейти в ветку:
 
   ```bash
   $ git checkout add-new-google-tests
   ```
 
-* Создать ветку `add-new-google-tests` и сразу перейти в нее:
+  1. Создать ветку `add-new-google-tests` и сразу перейти в нее:
 
   ```bash
   $ git checkout [-b] add-new-google-tests
   # [-b] - создание и переход в ветку <branch_name>
   ```
 
-* Удалить ветку в локальном репозитории:
+  1. Удалить ветку в локальном репозитории:
 
   ```bash
   $ git branch -d <branch_name>
@@ -44,13 +115,17 @@
   ```
 
 ### Работа с изменениями
-* Получить список текущих изменений:
+
+При работе с файлами в ветке необходимо управлять изменениями. Далее приведен
+перечень основных команд, которые могут понадобиться.
+
+  1. Получить список текущих изменений:
 
   ```bash
   $ git status
   ```
 
-* Пометить файл как добавленный в текущую ветку репозитория (файл будет
+  1. Пометить файл как добавленный в текущую ветку репозитория (файл будет
      добавлен в историю после выполнения команды `git commit`):
 
   ```bash
@@ -60,7 +135,7 @@
   #     не совпадающие с масками, указанными в .gitignore
   ```
 
-* Добавить изменения в текущую ветку локального репозитория:
+  1. Добавить изменения в текущую ветку локального репозитория:
 
   ```bash
   $ git commit [-m "<message_to_commit>"] [-a]
@@ -70,7 +145,7 @@
   #     изменения)
   ```
 
-* Разместить изменения, которые были добавлены в локальный репозиторий
+  1. Разместить изменения, которые были добавлены в локальный репозиторий
      с помощью команды `git commit`:
 
   ```bash
@@ -80,8 +155,25 @@
   #     без явного указания имени удалённого репозитория и имени ветки.
   ```
 
+  1. Получить изменения с сервера при помощи команды `git pull` и слить их с
+     отслеживаемыми ветками:
+
+  ```bash
+  $ git pull [remotename [<branch_name>]]
+  ```
+
+
+
+## Сборка проекта с помощью CMake и Microsoft Visual Studio
+
+В данном разделе описана типичная последовательность действий, которую
+необходимо выполнить для сборки проекта с использованием утилиты CMake и
+Microsoft Visual Studio. Далее для определенности выполняется сборка проекта из
+репозитория.
+
 ### Генерация проекта Microsoft Visual Studio
-* Рядом с вашей директорией создайте
+
+  1. Рядом с вашей директорией создайте
      `build`. В новой директории будут размещены файлы
      решения и проектов, сгенерированные с помощью CMake.
 
@@ -89,22 +181,17 @@
      $ mkdir build
      ```
 
-* Перейдите в директорию `itseez-ws-2016-practice-build`:
+  1. Перейдите в директорию `itseez-ws-2016-practice-build`:
 
      ```bash
      $ cd ./build
      ```
 
-* Сгенерируйте файлы решения и проектов с помощью утилиты CMake. Для этого
+  1. Сгенерируйте файлы решения и проектов с помощью утилиты CMake. Для этого
      можно воспользоваться графическим приложением, входящим в состав
      утилиты, либо выполнить следующую команду:
 
   ```bash
   $ cmake -G <generator-name> <path-to-repo>
    # <generator-name> - название генератора, в случае тестовой
-  #     инфраструктуры участников школы может быть "Visual Studio 10 Win64"
-  #     (если в командной строке набрать cmake без параметров, то можно просмотреть
-  #     список доступных генераторов)
-  # <path-to-repo> - путь до вашей директории, где лежат
-  #     исходные коды проекта 
-  ```
+  #     инфраструктуры участников школы может быть "Visual Studio 10 Win64
