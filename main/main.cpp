@@ -1,12 +1,23 @@
 #include <iostream>
-#include "NAME_1.h"
+#include "TwoPointers.h"
+#include <time.h>
+#include <stdlib.h>
 
-
-int main(){
-    setlocale(LC_ALL, "Russian");
-    printf("hello!\n");
-    printf("остаток : %d\n", even(8));
-
-    return 0;
+int main() {
+    int length; bool cycle;
+    cout << "list length : "; cin >> length;
+    int* array = new int[length];
+    for (int i = 0; i < length; i++) array[i] = i + 1;
+    cout << "cycle? "; cin >> cycle;
+    CLL _cll(array, length, cycle);
+    cout << "CLL_racers : ";
+    if (_cll.CLL_racers(_cll)) cout << "CLL" << endl;
+    else cout << "NO CLL" << endl;
+    _cll.ViewCLL(_cll);
+    cout << "CLL_reversible : ";
+    if (_cll.CLL_revers(_cll)) cout << "CLL" << endl;
+    else cout << "NO CLL" << endl;
+    _cll.ViewCLL(_cll);
+   
 
 }
