@@ -1,11 +1,21 @@
 #include <iostream>
-#include "NAME_1.h"
+#include <cstdlib>
+#include "spreadsheet_1.h"
 
 
 int main(){
-    setlocale(LC_ALL, "Russian");
-    printf("hello!\n");
-    printf("остаток : %d\n", even(8));
+    int arr[LENGTH];
+    srand(time(NULL));
+    
+    for (int i = 0; i < LENGTH; i++) { arr[i] = rand() % 10; }
+
+    Spreadsheet_1 sp(arr);
+    sp.GetArray();
+    sp.CreateMaxArray();
+    sp.GetArray();
+
+
+
 
     return 0;
 
