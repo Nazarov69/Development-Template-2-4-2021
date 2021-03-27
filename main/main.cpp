@@ -11,13 +11,13 @@ int main() {
     cout << "cycle? "; cin >> cycle;
     CLL _cll(array, length, cycle);
     cout << "CLL_racers : ";
-    if (_cll.CLL_racers(_cll)) cout << "CLL" << endl;
+    if (_cll.CLL_racers()) cout << "CLL" << endl;
     else cout << "NO CLL" << endl;
-    _cll.ViewCLL(_cll);
+    _cll.ViewCLL();
     cout << "CLL_reversible : ";
-    if (_cll.CLL_revers(_cll)) cout << "CLL" << endl;
+    if (_cll.CLL_revers()) cout << "CLL" << endl;
     else cout << "NO CLL" << endl;
-    _cll.ViewCLL(_cll);
+    _cll.ViewCLL();
    
 
 }

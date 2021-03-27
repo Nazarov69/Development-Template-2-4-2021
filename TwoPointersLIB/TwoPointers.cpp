@@ -33,12 +33,12 @@ CLL::CLL(int _array[], int _length, bool _cycle) {
 
 
 
-bool CLL::CLL_racers(CLL& _cll) {
-	element* racer_h = _cll.head;
+bool CLL::CLL_racers() {
+	element* racer_h = head;
 	if (racer_h != NULL) {
-		element* racer_hn = _cll.head->next;
+		element* racer_hn = head->next;
 		if (racer_hn != NULL) {
-			element* racer_hnn = _cll.head->next->next;
+			element* racer_hnn = head->next->next;
 			if (racer_hnn != NULL) {
 				do {
 					racer_hn = racer_hn->next;
@@ -58,8 +58,8 @@ bool CLL::CLL_racers(CLL& _cll) {
 	else { return false; }
 }
 
-bool CLL::CLL_revers(CLL& _cll) {
-	element* curr = _cll.head;
+bool CLL::CLL_revers() {
+	element* curr = head;
 	element* forward = NULL;
 	element* previous = NULL;
 
@@ -70,10 +70,10 @@ bool CLL::CLL_revers(CLL& _cll) {
 		curr = forward;	
 	}
 
-	if (_cll.head == previous && _cll.length > 2)
+	if (head == previous && length > 2)
 		return true;
 	else {
-		_cll.head = previous;
+		head = previous;
 		return false;
 	}
 	

@@ -16,15 +16,15 @@ class CLL{
 public:
 	
 	CLL(int _array[], int _length, bool cir = true);
-	bool CLL_racers(CLL& _cll);
-	bool CLL_revers(CLL& _cll);
-	void ViewCLL(CLL& _cll) {
-		element* view = _cll.head;
+	bool CLL_racers();
+	bool CLL_revers();
+	void ViewCLL() {
+		element* view = head;
 		/*while(view != NULL){
 			cout << view->item << " -> ";
 			view = view->next;
 		}*/
-		for (int i = 0; i < _cll.length; i++) {
+		for (int i = 0; i < length; i++) {
 			cout << view->item << " -> ";
 			view = view->next;
 		}
