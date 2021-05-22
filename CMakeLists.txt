@@ -1,12 +1,13 @@
 ﻿cmake_minimum_required(VERSION 2.8) #Проверка версии CMake.
 #________________________________________________________________________________________________________________
 
-set(PROJECT_NAME NAME) #Создаем обычную локальную переменную с именем проекта
+set(PROJECT_NAME TEXT) #Создаем обычную локальную переменную с именем проекта
 project(${PROJECT_NAME}) # Название проекта
 #________________________________________________________________________________________________________________
 
-set(NAMELIB_1 NAMELIB_1) #Переменная с именем приложения
-set(NAMELIB_2 NAMELIB_2) #Переменная с именем библиотеки
+set(TLinkLIB TLinkLIB) #Переменная с именем приложения
+set(TTextLIB TTextLIB) #Переменная с именем библиотеки
+set(TStackLIB TStackLIB)
 set(test test)
 set(gtest gtest)
 set(main main)
@@ -18,17 +19,25 @@ if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компиля
 endif()
 #________________________________________________________________________________________________________________
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/NAMELIB_1 ${CMAKE_CURRENT_SOURCE_DIR}/NAMELIB_2) #Добавляем директорию "${CMAKE_CURRENT_SOURCE_DIR}/vectorlib" в дополняемые каталоги включаемых файлов
+include_directories(
+${CMAKE_CURRENT_SOURCE_DIR}/TLinkLIB 
+${CMAKE_CURRENT_SOURCE_DIR}/TTextLIB
+${CMAKE_CURRENT_SOURCE_DIR}/TStackLIB
+) 
+
+#Добавляем директорию "${CMAKE_CURRENT_SOURCE_DIR}/vectorlib" в дополняемые каталоги включаемых файлов
 #${CMAKE_CURRENT_SOURCE_DIR} - стандартная переменная с адресом рабочей директории
 #________________________________________________________________________________________________________________
 
-add_subdirectory(NAMELIB_1) #Добавляем директорию с под-CMakeList-ом, и выполняем под-CMakeList
-add_subdirectory(NAMELIB_2)
+add_subdirectory(TLinkLIB) #Добавляем директорию с под-CMakeList-ом, и выполняем под-CMakeList
+add_subdirectory(TTextLIB)
+add_subdirectory(TStackLIB)
 add_subdirectory(test)
 add_subdirectory(gtest)
 add_subdirectory(main)
 #________________________________________________________________________________________________________________
 
+#file(GLOB hdrs "*.txt*")
 #file(GLOB hdrs "*.h*") #Добавляем в переменную hdrs все файлы с расширением .h
 #file(GLOB srcs "*.cpp") #Добавляем в переменную srcs все файлы с расширением .cpp
 #________________________________________________________________________________________________________________

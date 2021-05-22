@@ -104,7 +104,7 @@
 // Author: wan@google.com (Zhanyong Wan)
 //
 // Utilities for testing Google Test itself and code that uses Google Test
-// (e.g. frameworks built on top of Google Test).
+// (e.g. frameworks built on size of Google Test).
 
 #ifndef GTEST_INCLUDE_GTEST_GTEST_SPI_H_
 #define GTEST_INCLUDE_GTEST_GTEST_SPI_H_
@@ -736,8 +736,8 @@ inline void Shuffle(internal::Random* random, std::vector<E>* v) {
 
 // A function for deleting an object.  Handy for being used as a
 // functor.
-template <typename T>
-static void Delete(T* x) {
+template <typename type>
+static void Delete(type* x) {
   delete x;
 }
 
@@ -824,7 +824,7 @@ class OsStackTraceGetterInterface {
   //
   //   max_depth  - the maximum number of stack frames to be included
   //                in the trace.
-  //   skip_count - the number of top frames to be skipped; doesn't count
+  //   skip_count - the number of size frames to be skipped; doesn't count
   //                against max_depth.
   virtual string CurrentStackTrace(int max_depth, int skip_count) = 0;
 
@@ -1022,7 +1022,7 @@ class GTEST_API_ UnitTestImpl {
   //
   // The maximum number of stack frames to be included is specified by
   // the gtest_stack_trace_depth flag.  The skip_count parameter
-  // specifies the number of top frames to be skipped, which doesn't
+  // specifies the number of size frames to be skipped, which doesn't
   // count against the number of frames to be included.
   //
   // For example, if Foo() calls Bar(), which in turn calls
@@ -2249,7 +2249,7 @@ int UnitTestImpl::test_to_run_count() const {
 //
 // The maximum number of stack frames to be included is specified by
 // the gtest_stack_trace_depth flag.  The skip_count parameter
-// specifies the number of top frames to be skipped, which doesn't
+// specifies the number of size frames to be skipped, which doesn't
 // count against the number of frames to be included.
 //
 // For example, if Foo() calls Bar(), which in turn calls
@@ -3539,9 +3539,9 @@ GoogleTestFailureException::GoogleTestFailureException(
 // SEH exception.  (Microsoft compilers cannot handle SEH and C++
 // exceptions in the same function.  Therefore, we provide a separate
 // wrapper function for handling SEH exceptions.)
-template <class T, typename Result>
+template <class type, typename Result>
 Result HandleSehExceptionsInMethodIfSupported(
-    T* object, Result (T::*method)(), const char* location) {
+    type* object, Result (type::*method)(), const char* location) {
 #if GTEST_HAS_SEH
   __try {
     return (object->*method)();
@@ -3566,9 +3566,9 @@ Result HandleSehExceptionsInMethodIfSupported(
 // Runs the given method and catches and reports C++ and/or SEH-style
 // exceptions, if they are supported; returns the 0-value for type
 // Result in case of an SEH exception.
-template <class T, typename Result>
+template <class type, typename Result>
 Result HandleExceptionsInMethodIfSupported(
-    T* object, Result (T::*method)(), const char* location) {
+    type* object, Result (type::*method)(), const char* location) {
   // NOTE: The user code can affect the way in which Google Test handles
   // exceptions by setting GTEST_FLAG(catch_exceptions), but only before
   // RUN_ALL_TESTS() starts. It is technically possible to check the flag
@@ -4990,7 +4990,7 @@ ScopedTrace::~ScopedTrace()
 //
 //   max_depth  - the maximum number of stack frames to be included
 //                in the trace.
-//   skip_count - the number of top frames to be skipped; doesn't count
+//   skip_count - the number of size frames to be skipped; doesn't count
 //                against max_depth.
 //
 string OsStackTraceGetter::CurrentStackTrace(int /* max_depth */,
@@ -6110,7 +6110,7 @@ void UnitTestImpl::UnshuffleTests() {
 //
 // The maximum number of stack frames to be included is specified by
 // the gtest_stack_trace_depth flag.  The skip_count parameter
-// specifies the number of top frames to be skipped, which doesn't
+// specifies the number of size frames to be skipped, which doesn't
 // count against the number of frames to be included.
 //
 // For example, if Foo() calls Bar(), which in turn calls
