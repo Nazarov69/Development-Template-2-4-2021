@@ -1,92 +1,39 @@
-#include "TArrayTable.h"
-#include "THashTable.h"
-#include "TTreeTable.h"
-#include <fstream>
 
-string RandomSrting(int size);
+#include "Plex.h"
+#include "Circle.h"
+int main(){
+    cout << "__________________________Point__________________________" << endl;
+    Point first_point(1, 1);
+    cout << "First point (" << first_point.GetX() << ", " << first_point.GetY() << ")" << endl;
+    
+    Point second_point(2, 3);
+    second_point.Show();
 
-int main() {
-	ifstream ifs("SmellsLikeTeenSpirit.txt");
-	if (!ifs.is_open()) {
-		cout << "Reading file error\n";
-		return 1;
-	}
+    Point copy_point(first_point);
+    cout << "Copy point (" << copy_point.GetX() << ", " << copy_point.GetY() << ")" << endl;
 
-	int count = 1000;
-	char buffer[50];
-	ScanTable<string, int> scantab(count);
-	SortTable<string, int> sorttab(count);
-	ArrayHash<string, int> hashtab(count);
-	TreeTable<string, int> treetab;
+    second_point.SetX(5); second_point.SetY(10);
+    second_point.Show();
 
-	while (!ifs.eof()) {
-		ifs >> buffer;
-		string str(buffer);
-		Record<string, int> tmp(str, 1);
+    cout << "__________________________Line__________________________" << endl;
+    Line first_line;
+    cout << "First line : (" << first_line.GetFisrtPointX() << ", " << first_line.GetFirstPointY() << ") (" << first_line.GetSecondPointX() << ", " << first_line.GetSecondPointY() << ")" << endl;
 
-		if (scantab.Find(tmp.GetKey())) { scantab.SetCurrValue(scantab.GetCurrent().GetValue() + 1); }
-		else {
-			if (!scantab.IsFull()) { scantab.Insert(tmp); }
-			else {
-				cout << "Table size is too small!\n";
-				return 1;
-			}
-		}
-		if (sorttab.Find(tmp.GetKey())) { sorttab.SetCurrValue(sorttab.GetCurrent().GetValue() + 1); }
-		else {
-			if (!sorttab.IsFull()) { sorttab.Insert(tmp); }
-			else {
-				cout << "Table size is too small!\n";
-				return 1;
-			}
-		}
-		if (hashtab.Find(tmp.GetKey())) { hashtab.SetCurrValue(hashtab.GetCurrent().GetValue() + 1); }
-		else {
-			if (!hashtab.IsFull()) { hashtab.Insert(tmp); }
-			else {
-				cout << "Table size is too small!\n";
-				return 1;
-			}
-		}
-		if (treetab.Find(tmp.GetKey())) { treetab.SetResValue(treetab.GetResRecord().GetValue() + 1); }
-		else {
-			if (!treetab.IsFull()) { treetab.Insert(tmp); }
-			else {
-				cout << "Table size is too small!\n";
-				return 1;
-			}
-		}
-	}
+    Line second_line(&first_point, &second_point);
+    second_line.Show();
 
-	//scantab.Print();
-	sorttab.Print();
-	//hashtab.PrintAll();
-	//treetab.Print();
-	cout << endl;
+    Line third_line(5, 7, 1, 8);
+    third_line.Show();
+   
+    cout << third_line.GetFirstPoint()->GetX() << endl;
+    cout << third_line.GetSecondPoint()->GetY() << endl;
 
-	Record<string, int> maximum[10];
-	SortTable<int, string> top(count);
+    third_line.SetFirstPointX(9);
+    cout << third_line.GetFisrtPointX() << endl;
 
-	for (sorttab.Reset(); !sorttab.IsEnd(); sorttab.GoNext()) { top.Insert(Record<int, string>(sorttab.GetCurrent().GetValue(), sorttab.GetCurrent().GetKey())); }
-	for (top.Reset(); !top.TenRecordsLeft(); top.GoNext());
+    third_line.SetSecondPoint(&second_point);
+    third_line.GetSecondPoint()->Show();
+    return 0;
 
-	int i = 0;
-	while (!top.IsEnd()) {
-		maximum[i] = Record<string, int>(top.GetCurrent().GetValue(), top.GetCurrent().GetKey());
-		i++;
-		top.GoNext();
-	}
-	cout << "maximum:\n";
-	for (i = 0; i < 10; i++) {
-		maximum[i].Print();
-		cout << endl;
-	}
-	ifs.close();
-	return 0;
-}
 
-string RandomSrting(int size) {
-	string res = "";
-	for (int i = 0; i < size; i++) { res += (char)(rand() % 26 + 'a'); }
-	return res;
 }
