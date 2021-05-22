@@ -1,12 +1,12 @@
 ﻿cmake_minimum_required(VERSION 2.8) #Проверка версии CMake.
 #________________________________________________________________________________________________________________
 
-set(PROJECT_NAME NAME) #Создаем обычную локальную переменную с именем проекта
+set(PROJECT_NAME POLINOM) #Создаем обычную локальную переменную с именем проекта
 project(${PROJECT_NAME}) # Название проекта
 #________________________________________________________________________________________________________________
 
-set(NAMELIB_1 NAMELIB_1) #Переменная с именем приложения
-set(NAMELIB_2 NAMELIB_2) #Переменная с именем библиотеки
+set(TMonom_TPolinomLIB TMonom_TPolinomLIB) #Переменная с именем приложения
+set(TListLIB TListLIB) #Переменная с именем библиотеки
 set(test test)
 set(gtest gtest)
 set(main main)
@@ -18,12 +18,16 @@ if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компиля
 endif()
 #________________________________________________________________________________________________________________
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/NAMELIB_1 ${CMAKE_CURRENT_SOURCE_DIR}/NAMELIB_2) #Добавляем директорию "${CMAKE_CURRENT_SOURCE_DIR}/vectorlib" в дополняемые каталоги включаемых файлов
+include_directories(
+${CMAKE_CURRENT_SOURCE_DIR}/TMonom_TPolinomLIB
+${CMAKE_CURRENT_SOURCE_DIR}/TListLIB
+) 
+#Добавляем директорию "${CMAKE_CURRENT_SOURCE_DIR}/vectorlib" в дополняемые каталоги включаемых файлов
 #${CMAKE_CURRENT_SOURCE_DIR} - стандартная переменная с адресом рабочей директории
 #________________________________________________________________________________________________________________
 
-add_subdirectory(NAMELIB_1) #Добавляем директорию с под-CMakeList-ом, и выполняем под-CMakeList
-add_subdirectory(NAMELIB_2)
+add_subdirectory(TMonom_TPolinomLIB) #Добавляем директорию с под-CMakeList-ом, и выполняем под-CMakeList
+add_subdirectory(TListLIB)
 add_subdirectory(test)
 add_subdirectory(gtest)
 add_subdirectory(main)
