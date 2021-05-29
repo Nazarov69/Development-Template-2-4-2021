@@ -2,6 +2,7 @@
 #include "THashTable.h"
 #include "TTreeTable.h"
 #include <fstream>
+using namespace std;
 
 string RandomSrting(int size);
 
@@ -17,7 +18,7 @@ int main() {
 	ScanTable<string, int> scantab(count);
 	SortTable<string, int> sorttab(count);
 	ArrayHash<string, int> hashtab(count);
-	TreeTable<string, int> treetab;
+	TreeTable<string, int> treetab;	
 
 	while (!ifs.eof()) {
 		ifs >> buffer;
@@ -84,6 +85,8 @@ int main() {
 	ifs.close();
 	return 0;
 }
+
+
 
 string RandomSrting(int size) {
 	string res = "";

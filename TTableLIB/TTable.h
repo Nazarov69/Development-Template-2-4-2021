@@ -45,6 +45,7 @@ Record<TKey, TValue>::Record(const Record<TKey, TValue>& rec) {
 
 template <class TKey, class TValue>
 Record<TKey, TValue>& Record<TKey, TValue>::operator=(const Record<TKey, TValue>& rec) {
+	if (this == &rec) return *this;
 	key = rec.key;
 	value = rec.value;
 	return *this;
@@ -70,9 +71,9 @@ public:
 	bool IsEmpty() { return dataCount == 0; }
 	virtual bool IsFull() = 0;
 
-	virtual bool Find(TKey fkey) = 0;
+	virtual bool Find(TKey _key) = 0;
 	virtual void Insert(Record<TKey, TValue> rec) = 0;
-	virtual void Delete(TKey dkey) = 0;
+	virtual void Delete(TKey _key) = 0;
 
 	virtual void Reset() = 0;
 	virtual bool IsEnd() = 0;

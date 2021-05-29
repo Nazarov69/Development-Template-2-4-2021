@@ -6,7 +6,8 @@ class HashTable : public Table<TKey, TValue> {
 protected:
 	int HashFunc(TKey _key) {
 		int hash = 0;
-		for (int i = 0; i < _key.length(); i++) { hash += _key[i] << i; }
+		for (int i = 0; i < _key.length(); i++) 
+		{ hash += _key[i] << i; }
 		return hash;
 	}
 };
@@ -89,8 +90,8 @@ void ArrayHash<TKey, TValue>::Insert(Record<TKey, TValue> rec) {
 }
 
 template <class TKey, class TValue>
-void ArrayHash<TKey, TValue>::Delete(TKey dkey) {
-	if (Find(dkey)) {
+void ArrayHash<TKey, TValue>::Delete(TKey _key) {
+	if (Find(_key)) {
 		arr[currNum].GetKey() = "&";
 		dataCount--;
 	}
@@ -99,7 +100,7 @@ void ArrayHash<TKey, TValue>::Delete(TKey dkey) {
 template <class TKey, class TValue>
 void ArrayHash<TKey, TValue>::Reset() {
 	currNum = 0;
-	while (((arr[currNum].GetKey() == "&") || (arr[currNum].GetKey() == "")) && (currNum < size)) {
+	while ((arr[currNum].GetKey() == "&" || arr[currNum].GetKey() == "") && currNum < size) {
 		currNum++;
 	}
 }
@@ -112,7 +113,6 @@ void ArrayHash<TKey, TValue>::GoNext() {
 	while ((++currNum < size)) {
 		if (((arr[currNum].GetKey() != "&") && (arr[currNum].GetKey() != "")))
 			break;
-		//currNum++;
 	}
 }
 
@@ -131,9 +131,7 @@ void ArrayHash<TKey, TValue>::Print() {
 	Record<TKey, TValue> tmp;
 	for (Reset(); !IsEnd(); GoNext()) {
 		tmp = GetCurrent();
-		cout << currNum << ") " << GetString(tmp.key) << " - " << tmp.value << endl;
-		//if(currNum < size - 1)
-		//currNum++;
+		cout << currNum << ") " << GetString(tmp.GetKey()) << " - " << tmp.GetValue() << endl;
 	}
 }
 
@@ -143,9 +141,7 @@ void ArrayHash<TKey, TValue>::PrintAll() {
 	for (int i = 0; i < size; i++) {
 		currNum = i;
 		tmp = GetCurrent();
-		cout << currNum << ") " << GetString(tmp.key) << " - " << tmp.value << endl;
-		//if(currNum < size - 1)
-		//currNum++;
+		cout << currNum << ") " << GetString(tmp.GetKey()) << " - " << tmp.GetValue() << endl;
 	}
 }
 

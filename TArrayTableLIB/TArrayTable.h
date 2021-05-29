@@ -51,7 +51,7 @@ ArrayTable<TKey, TValue>& ArrayTable<TKey, TValue>::operator=(const ArrayTable<T
 	if (size != tab.size) {
 		size = tab.size;
 		delete[] arr;
-		arr = new new TRecord<TKey, TValue>[size];
+		arr = new TRecord<TKey, TValue>[size];
 	}
 	for (int i = 0; i < size; i++) { arr[i] = tab.arr[i] }
 
@@ -95,7 +95,7 @@ ScanTable<TKey, TValue>& ScanTable<TKey, TValue>::operator=(const SortTable<TKey
 	}
 	dataCount = tab.GetDataCount();
 	currNum = tab.GetCurrNum();
-	arr = new Record<TKey, TValue>[size];
+	//arr = new Record<TKey, TValue>[size];
 	for (int i = 0; i < dataCount; i++) { arr[i] = tab.GetArrElem(i); }
 	return *this;
 }
@@ -188,12 +188,8 @@ bool SortTable<TKey, TValue>::Find(TKey _key) {
 			currNum = middle;
 			return true;
 		}
-		else if (_key > arr[middle].GetKey()) {
-			left = middle + 1;
-		}
-		else {
-			right = middle - 1;
-		}
+		else if (_key > arr[middle].GetKey()) { left = middle + 1; }
+		else { right = middle - 1; }
 	}
 	currNum = left;
 	return false;
@@ -227,24 +223,25 @@ void SortTable<TKey, TValue>::QSort(int left, int right) {
 	int middle = (left + right) / 2;
 	TKey middle_key = arr[middle].key;
 	Record<TKey, TValue> tmp;
+	int copy_left = left, copy_right = right;
 
-	while (left <= right) {
-		while (arr[left].key < middle_key) {
-			left++;
+	while (copy_left <= copy_right) {
+		while (arr[copy_left].key < middle_key) {
+			copy_left++;
 			efficiency++;
 		}
-		while (arr[right].key > middle_key) {
-			right--;
+		while (arr[copy_right].key > middle_key) {
+			copy_right--;
 			efficiency++;
 		}
-		if (left <= right) {
-			tmp = arr[left];
-			arr[left] = arr[right];
-			arr[right] = tmp;
-			left++;
-			right--;
+		if (copy_left <= copy_right) {
+			tmp = arr[copy_left];
+			arr[copy_left] = arr[copy_left];
+			arr[copy_right] = tmp;
+			copy_left++;
+			copy_right--;
 		}
-		if (right > left) { QSort(left, right); }
-		if (left < right) { QSort(left, right); }
+		if (copy_right > left) { QSort(left, copy_right); }
+		if (copy_left < right) { QSort(copy_left, right); }
 	}
 }
