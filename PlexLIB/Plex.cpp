@@ -25,7 +25,7 @@ Point* Plex::GetPLexFirstPoint() { return plex_first_point; }
 
 Point* Plex::GetPlexSecondPoint() { return plex_second_point; }
 
-void Plex::Add(Point* _plex_first_point, Point* _plex_second_point) {
+void Plex::Add(Point* _plex_second_point, Point* _plex_first_point) {
 	if (plex_first_point == NULL && plex_second_point == NULL) {
 		plex_first_point = _plex_first_point;
 		plex_second_point = _plex_second_point;
@@ -81,7 +81,7 @@ Point* Plex::Show(Plex* plex) {
 	if (plex_first != NULL) { point_first = Show(plex_first); }
 	else { point_first = plex->plex_first_point; }
 
-	if (plex_first != NULL) { point_second = Show(plex_second); }
+	if (plex_second != NULL) { point_second = Show(plex_second); }
 	else { point_second = plex->plex_second_point; }
 
 	Line line(point_first, point_second);
@@ -89,83 +89,4 @@ Point* Plex::Show(Plex* plex) {
 	return point_first;
 }
 
-void Plex::Show() {
-	if (plex_first_point == 0 && plex_second_point == 0) { throw logic_error("plex is empty"); }
-	stack<Point*> point;
-	stack<Plex*> stack;
-	Plex* plex_first, * plex_second;
-	Plex* plex = this;
-	Point* point_first = NULL, * point_second = NULL;
-	stack.push(plex);
-	while (!stack.empty()){
-		plex = stack.top();
-		while (point_second == NULL){
-			plex_second = dynamic_cast<Plex*>(plex->plex_second_point);
-			plex_first = dynamic_cast<Plex*>(plex->plex_first_point);
-			if (plex_first != 0 && plex_second != 0) {
-				if ((int)point.top() % 2 == 0) {
-					stack.pop();
-					plex = stack.top();
-				}
-				else if ((int)point.top() == 1) {
-					stack.pop();
-					point_second = point.top();
-					stack.pop();
-					point_first = point.top();
-				}
-				else {
-					stack.push(plex);
-					stack.push(plex_second);
-					stack.push(plex);
-					plex = dynamic_cast<Plex*>(plex_first);
-				}
-			}
-			else if (plex_second != NULL) {
-				stack.push(plex);
-				plex = dynamic_cast<Plex*>(plex_second);
-			}
-			else { point_second = plex->plex_second_point; }
-		}
 
-
-
-		if (point_first == NULL){
-			plex_first = dynamic_cast<Plex*>(plex->plex_first_point);
-			if (plex_first != NULL){
-				stack.push(plex);
-				plex = dynamic_cast<Plex*>(plex_first);
-				point_second = NULL;
-				stack.push(plex);
-			}
-			else { point_first = plex->plex_first_point; }
-		}
-
-
-
-		if (point_first != NULL && point_second != NULL){
-			Line line(point_first, point_second);
-			line.Show();
-			if (!stack.empty()){
-				stack.pop();
-				plex = stack.top();
-				plex_second = dynamic_cast<Plex*>(plex->plex_second_point);
-				plex_first = dynamic_cast<Plex*>(plex->plex_first_point);
-				Point* point_p = plex_first;
-				if (plex_first != 0 && plex_second != 0){
-					point.push(point_p);
-					point_first = NULL;
-					point_second = NULL;
-				}
-				else if (plex_second != 0){
-					point_second = point_p;
-					point_first = NULL;
-				}
-				else{
-					point_first = point_p;
-					point_second = NULL;
-				}
-				stack.push(plex);
-			}
-		}
-	}
-}

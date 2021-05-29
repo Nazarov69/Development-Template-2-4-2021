@@ -18,7 +18,6 @@ public:
 	void SetPlexFirstPoint(Point* _plex_first_point);
 	void SetPlexSecondPoint(Point* _plex_second_point);
 
-	void Show() override;
 	Point* Show(Plex* plex);
 };
 

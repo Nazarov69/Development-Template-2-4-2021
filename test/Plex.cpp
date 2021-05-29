@@ -138,7 +138,7 @@ TEST(Plex, can_get_second_point) {
 	Point* first_point, * second_point;
 	first_point = new Point(7, 5);
 	second_point = new Point(4, 9);
-	plex.Add(first_point, second_point);
+	plex.Add(second_point, first_point);
 	EXPECT_TRUE(plex.GetPlexSecondPoint() == second_point);
 }
 
@@ -147,7 +147,7 @@ TEST(Plex, can_get_first_point){
 	Point* first_point, * second_point;
 	first_point = new Point(7, 5);
 	second_point = new Point(4, 9);
-	plex.Add(first_point, second_point);
+	plex.Add(second_point, first_point);
 	EXPECT_TRUE(plex.GetPLexFirstPoint() == first_point);
 }
 
@@ -157,7 +157,7 @@ TEST(Plex, can_set_second_point){
 	first_point = new Point(7, 5);
 	second_point = new Point(4, 9);
 	third_point = new Point(3, 8);
-	plex.Add(first_point, second_point);
+	plex.Add(second_point, first_point);
 	EXPECT_TRUE(plex.GetPlexSecondPoint() == second_point);
 	plex.SetPlexSecondPoint(third_point);
 	EXPECT_TRUE(plex.GetPlexSecondPoint() == third_point);
@@ -169,7 +169,7 @@ TEST(Plex, can_set_first_point){
 	first_point = new Point(7, 5);
 	second_point = new Point(4, 9);
 	third_point = new Point(3, 8);
-	plex.Add(first_point, second_point);
+	plex.Add(second_point, first_point);
 	EXPECT_TRUE(plex.GetPLexFirstPoint() == first_point);
 	plex.SetPlexFirstPoint(third_point);
 	EXPECT_TRUE(plex.GetPLexFirstPoint() == third_point);
